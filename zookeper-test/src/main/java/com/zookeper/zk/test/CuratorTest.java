@@ -1,7 +1,7 @@
 package com.zookeper.zk.test;
 
 import com.alibaba.fastjson.JSON;
-import com.zookeper.zk.ZookeperTestApplication;
+import com.zookeper.zk.ZookeeperTestApplication;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.api.BackgroundCallback;
 import org.apache.curator.framework.api.CuratorEvent;
@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = ZookeperTestApplication.class)
+@SpringBootTest(classes = ZookeeperTestApplication.class)
 public class CuratorTest {
 
     @Autowired

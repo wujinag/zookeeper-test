@@ -2,14 +2,25 @@
 server.port:
   9994
 
-#curator����
-# zookeeper ��ַ
+#curator zookeeper
 curator.connectString : localhost:2181
-  # ���Դ���
 curator.retryCount : 3
-  # ���Լ��ʱ��
 curator.elapsedTimeMs : 2000
-  # session��ʱʱ��
 curator.sessionTimeoutMs: 60000
-  # ���ӳ�ʱʱ��
 curator.connectionTimeoutMs: 10000
+
+#mysql 连接
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/zookeeper?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: root
+
+#全局设置主键生成策略
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+
+  mapper-locations: classpath*:/xml/**/*.xml
