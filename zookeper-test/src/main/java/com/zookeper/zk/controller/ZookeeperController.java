@@ -36,9 +36,9 @@ public class ZookeeperController {
 
 
     @ApiOperation("获取zk配置")
-    @GetMapping("/bbb")
-    public ZookeeperEntity getConfig(){
-        ZookeeperEntity zookeeperEntity = zookeeperService.qryZookeeperInfo(1L);
+    @GetMapping("/get/{id}")
+    public ZookeeperEntity getConfig(@PathVariable("id") Long id){
+        ZookeeperEntity zookeeperEntity = zookeeperService.qryZookeeperInfo(id);
         return  zookeeperEntity;
     }
 
