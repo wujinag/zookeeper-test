@@ -7,6 +7,7 @@ import com.wuj.entiy.ZookeeperEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -76,6 +77,9 @@ public class ZookeeperController {
     @PostMapping("/add")
     public String addConfig(@RequestBody TcConfig vo){
         zookeeperService.addConfig(vo);
+        ZookeeperEntity voe = new ZookeeperEntity();
+        BeanUtils.copyProperties(vo,voe);
+        zookeeperService.addConfig1(voe);
         return "操作成功！！";
     }
 

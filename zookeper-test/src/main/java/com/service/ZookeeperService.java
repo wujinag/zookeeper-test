@@ -8,4 +8,7 @@ public interface ZookeeperService {
   ZookeeperEntity  qryZookeeperInfo(Long id);
 
   void addConfig(TcConfig entity);
+
+  void addConfig1(ZookeeperEntity entity);
+
 }

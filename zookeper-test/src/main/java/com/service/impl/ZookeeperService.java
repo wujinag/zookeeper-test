@@ -27,5 +27,8 @@ public class ZookeeperService implements com.service.ZookeeperService {
         tcConfigMapper.insert(entity);
     }
 
-
+    @Override
+    public void addConfig1(ZookeeperEntity entity) {
+        zkMapper.insert(entity);
+    }
 }
