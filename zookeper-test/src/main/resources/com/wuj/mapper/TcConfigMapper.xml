@@ -98,7 +98,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.wuj.entity.TcConfig">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into tc_config (config_name, config_ip)

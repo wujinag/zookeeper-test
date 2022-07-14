@@ -33,7 +33,7 @@ public class MyCustomizeBatisGenerator extends DefaultCommentGenerator {
     public void addFieldComment(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
         String remarks = introspectedColumn.getRemarks();
         if (addRemarkCommnets&&StringUtility.stringHasValue(remarks)) {
-            addFieldJavaDoc(field, remarks);
+            //addFieldJavaDoc(field, remarks);
             if (remarks.contains("\"")) {
                 remarks =remarks.replace("\"","'");
             }

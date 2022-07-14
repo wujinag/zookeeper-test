@@ -1,18 +1,16 @@
 package com.wuj.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.io.Serializable;
+
 public class TcConfig implements Serializable {
-    @TableId
+    @ApiModelProperty(value = "主键")
     private Long id;
 
+    @ApiModelProperty(value = "名称")
     private String configName;
 
+    @ApiModelProperty(value = "IP地址")
     private String configIp;
 
     private static final long serialVersionUID = 1L;
