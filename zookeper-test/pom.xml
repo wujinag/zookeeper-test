@@ -153,6 +153,14 @@
         </dependency>
 
 
+        <!-- devtools -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -160,6 +168,10 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <!-- 网上说如果没有该项配置，devtools不会起作用，即应用不会restart，但我没添加仍有效 -->
+                </configuration>
             </plugin>
         </plugins>
     </build>

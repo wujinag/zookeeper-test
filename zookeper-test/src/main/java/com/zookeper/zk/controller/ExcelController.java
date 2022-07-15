@@ -1,8 +1,8 @@
 package com.zookeper.zk.controller;
 
 import com.alibaba.excel.EasyExcel;
-import com.fasterxml.uuid.Generators;
-import com.fasterxml.uuid.UUIDGenerator;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URLEncoder;
@@ -60,7 +61,7 @@ public class ExcelController {
             String key =PREFIX + SEND_LIST+ uuid;
             redisService.set(key,gson.toJson(listExcels));
             redisService.expire(key,EXPIRE_TIME);
-            return uuid;
+            return key;
         }
         return null;
     }
@@ -70,7 +71,7 @@ public class ExcelController {
     public void export(HttpServletResponse response) throws Exception {
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
-        String fileName = "发送名单管理模板.xlsx";
+            String fileName = "发送名单管理模板.xlsx";
         response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
         EasyExcel.write(response.getOutputStream(), ExcelTemplateModel.class).sheet("sheet1").doWrite(new ArrayList<ExcelTemplateModel>());
     }
@@ -103,5 +104,14 @@ public class ExcelController {
                     .registerWriteHandler(commentWriteHandler)
                     .doWrite(sendListExcels);
         }
+    }
+
+    @GetMapping("readExcelExcel")
+    public String readExcel(){
+        String fileName =this.getClass().getResource("/").getPath()+"excel"+File.separator+ File.separator+ "demo.xlsx";
+        EasyExcelListener listener = new EasyExcelListener();
+        EasyExcel.read(fileName,ExcelTemplateModel.class,listener).sheet().doRead();
+        JSON.DEFFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+        return JSON.toJSONString(listener.getListExcels(), SerializerFeature.PrettyFormat,SerializerFeature.WriteBigDecimalAsPlain,SerializerFeature.PrettyFormat);
     }
 }
