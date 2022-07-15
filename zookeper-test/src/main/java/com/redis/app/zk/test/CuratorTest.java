@@ -1,7 +1,7 @@
-package com.zookeper.zk.test;
+package com.redis.app.zk.test;
 
 import com.alibaba.fastjson.JSON;
-import com.zookeper.zk.ZookeeperTestApplication;
+import com.redis.app.zk.ZookeeperTestApplication;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.api.BackgroundCallback;
 import org.apache.curator.framework.api.CuratorEvent;

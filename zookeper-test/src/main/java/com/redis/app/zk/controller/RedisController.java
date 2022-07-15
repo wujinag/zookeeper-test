@@ -1,4 +1,4 @@
-package com.zookeper.zk.controller;
+package com.redis.app.zk.controller;
 
 import com.utils.RedissonDistributedLocker;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class RedisController {
     @Autowired
     private RedissonDistributedLocker distributedLocker;
+
+
 
     @GetMapping("/test")
     public void testLock() throws InterruptedException {
@@ -42,5 +44,7 @@ public class RedisController {
         System.out.println(counter[0]);
         log.info("=============>{}",counter[0]+"");
     }
+
+
 
 }

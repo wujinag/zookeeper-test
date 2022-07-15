@@ -1,4 +1,4 @@
-package com.zookeper.zk.controller;
+package com.redis.app.zk.controller;
 
 import com.service.RedisService;
 import com.service.ZookeeperService;
