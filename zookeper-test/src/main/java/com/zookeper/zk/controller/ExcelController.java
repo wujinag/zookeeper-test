@@ -71,9 +71,11 @@ public class ExcelController {
     public void export(HttpServletResponse response) throws Exception {
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
-            String fileName = "发送名单管理模板.xlsx";
+        String fileName = "中文.xlsx";
+        //建议加上该段，否则可能会出现前端无法获取Content-disposition
+        response.setHeader("Access-Control-Expose-Headers", "Content-Disposition");
         response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
-        EasyExcel.write(response.getOutputStream(), ExcelTemplateModel.class).sheet("sheet1").doWrite(new ArrayList<ExcelTemplateModel>());
+        EasyExcel.write(response.getOutputStream(), ExcelTemplateModel.class).sheet("账号列表").doWrite(new ArrayList<ExcelTemplateModel>());
     }
 
     @GetMapping("downloadErrorExcel")

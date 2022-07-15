@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  * AnalysisEventListener适配器
- * @author wujiang
+ * @author wujiangre
  * @date 2022/7/8 17:49
  */
 public abstract class AnalysisEventListenerAdapter<T> extends AnalysisEventListener<T> {
