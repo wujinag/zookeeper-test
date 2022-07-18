@@ -15,24 +15,23 @@ public class RedisController {
     private RedissonDistributedLocker distributedLocker;
 
 
-
     @GetMapping("/test")
     public void testLock() throws InterruptedException {
-        final int[] counter ={0};
+        final int[] counter = {0};
         for (int i = 0; i < 100; i++) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     String myLock = "redis_001";
                     boolean isGetLock = distributedLocker.tryLock(myLock, 3L, 1L);
-                    if(isGetLock){
-                        log.info("拿到锁?=={}",isGetLock?"Y":"N");
+                    log.info("拿到锁?=={}", isGetLock ? "Y" : "N");
+                    if (isGetLock) {
                         try {
                             //TODO 执行相应的业务逻辑，防止并发
                             int a = counter[0];
-                            counter[0]= a+1;
-                            log.info("currentThread={},======run==={}",Thread.currentThread().getName(),a+"");
-                        }finally {
+                            counter[0] = a + 1;
+                            log.info("currentThread={},======run==={}", Thread.currentThread().getName(), a + "");
+                        } finally {
                             distributedLocker.unLock(myLock);
                         }
                     }
@@ -42,9 +41,8 @@ public class RedisController {
         //主线程休眠
         Thread.sleep(5000);
         System.out.println(counter[0]);
-        log.info("=============>{}",counter[0]+"");
+        log.info("=============>{}", counter[0] + "");
     }
-
 
 
 }
