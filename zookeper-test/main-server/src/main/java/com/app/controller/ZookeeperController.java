@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.util.Random;
 
@@ -35,8 +37,8 @@ public class ZookeeperController {
     @Value("${redis.key.expire.authCode}")
     private Long AUTH_CODE_EXPIRE_SECONDS;
 
-//    @Autowired
-//    private JedisPool pool;
+    @Autowired
+    private JedisPool pool;
 
 
     @ApiOperation("获取zk配置")
@@ -86,12 +88,12 @@ public class ZookeeperController {
         return "操作成功！！";
     }
 
-
-//    @GetMapping("/testJedis")
-//    public String testTask(){
-//        Jedis jedis = pool.getResource();
-//        long hahah = jedis.lpush("app::list", "hahah");
-//            return jedis.rpop("app::list").toString();
-//    }
+    @ApiOperation("")
+    @GetMapping("/testJedis")
+    public String testTask(){
+        Jedis jedis = pool.getResource();
+        long hahah = jedis.lpush("app::list", "hahah");
+            return jedis.rpop("app::list").toString();
+    }
 
 }
