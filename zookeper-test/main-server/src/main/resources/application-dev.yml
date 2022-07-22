@@ -53,3 +53,7 @@ redis:
     expire:
       authCode: 60 # 验证码超期时间
 
+#定时任务配置参数
+scheduled:
+    task:
+        cron: 0/20 * * * * ?
