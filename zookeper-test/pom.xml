@@ -7,11 +7,10 @@
         <version>2.7.0</version>
         <relativePath/>
     </parent>
-
-    <groupId>com.zookeper</groupId>
-    <artifactId>demo</artifactId>
+    <name>personal-platform</name>
+    <groupId>com.personal</groupId>
+    <artifactId>personal</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>zookeper-test</name>
     <packaging>pom</packaging>
 
     <modelVersion>4.0.0</modelVersion>
