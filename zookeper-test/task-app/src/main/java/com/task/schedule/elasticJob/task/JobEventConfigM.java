@@ -8,8 +8,15 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+/**
+ * 配置JobEventConfig事件追踪
+ * @author wujiang
+ * @date 2022/7/25 10:54
+
+ */
+
 @Configuration
-public class JobEventConfig {
+public class JobEventConfigM {
 
     @Resource
     private DataSource dataSource;

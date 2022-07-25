@@ -2,7 +2,6 @@ package com.task.schedule.spring.task;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
@@ -33,10 +32,10 @@ public class ScheduledTasks {
     public void reportCurrentTimeWithFixedRate(){
         try {
             log.info("Current Thread : {}", Thread.currentThread().getName());
-            System.out.println("========================== reportCurrentTimeWithFixedRate===========================");
+            //System.out.println("========================== reportCurrentTimeWithFixedRate===========================");
             TimeUnit.SECONDS.sleep(3);
         } catch (InterruptedException e) {
-            log.info("定时任务 Fixed Delay Task : The time is now {}", dateFormat.format(new Date()));
+            log.error("定时任务 Fixed Delay Task : The time is now {}", dateFormat.format(new Date()));
         }
     }
 
@@ -48,11 +47,11 @@ public class ScheduledTasks {
     //@Scheduled(fixedDelay = 2000L)
     public void  reportCurrentTimeWithFixedDelay(){
         try {
-            log.debug("定时任务  延迟执行  Task running : The time is now {}", dateFormat.format(new Date()));
-            System.out.println("========================== reportCurrentTimeWithFixedDelay===========================");
+            //log.debug("定时任务  reportCurrentTimeWithFixedDelay  Task running : The time is now {}", dateFormat.format(new Date()));
+            //System.out.println("========================== reportCurrentTimeWithFixedDelay===========================");
             TimeUnit.SECONDS.sleep(3);
         } catch (InterruptedException e) {
-            log.info("定时任务 Fixed Delay Task : The time is now {}", dateFormat.format(new Date()));
+            log.error("定时任务 Fixed Delay Task : The time is now {}", dateFormat.format(new Date()));
         }
     }
 
@@ -68,8 +67,8 @@ public class ScheduledTasks {
     /**
      * cron：使用Cron表达式。　每分钟的1，2秒运行
      */
-    @Scheduled(cron = "${scheduled.task.cron}")
+   // @Scheduled(cron = "${scheduled.task.cron}")
     public void reportCurrentTimeWithCronExpression() {
-        log.info("定时任务 表达式Cron Expression: The time is now {}", dateFormat.format(new Date()));
+        log.info("定时任务 表达式 Cron Expression: The time is now {}", dateFormat.format(new Date()));
     }
 }
