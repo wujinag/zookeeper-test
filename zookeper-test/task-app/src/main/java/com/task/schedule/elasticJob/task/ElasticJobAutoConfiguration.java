@@ -13,8 +13,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
-import javax.annotation.Resource;
 import java.util.Map;
 
 @Configuration
@@ -23,11 +23,11 @@ public class ElasticJobAutoConfiguration {
 
     private final ApplicationContext applicationContext;
 
-    @Resource
-    private ZookeeperRegistryCenter center;
+    private final ZookeeperRegistryCenter center;
 
-    @Resource
-    private JobEventConfiguration jobEventConfiguration;
+    private final JobEventConfiguration jobEventConfiguration;
+
+    private final Environment environment;
 
 
     @Bean
@@ -42,14 +42,21 @@ public class ElasticJobAutoConfiguration {
                 continue;
             }
             String jobName = StringUtils.defaultIfBlank(elasticSimpleJobAnnotation.name(), simpleJob.getClass().getSimpleName());
-            String cron = StringUtils.defaultIfBlank(elasticSimpleJobAnnotation.cron(), elasticSimpleJobAnnotation.value());
+            //String cron = StringUtils.defaultIfBlank(elasticSimpleJobAnnotation.cron(), elasticSimpleJobAnnotation.value());
             //定义SIMPLE类型配置
+            //获取系统配置的定时任务参数
+            String cron = environment.getProperty(jobName+".cron").toString();
+
+            int shardingTotalCount = Integer.valueOf(environment.getProperty(jobName+".shardingTotalCount"));
+
+            String shardingItemParameters = environment.getProperty(jobName+".shardingItemParameters").toString();
+
             SimpleJobConfiguration simpleJobConfiguration = new SimpleJobConfiguration(
                     JobCoreConfiguration.newBuilder(
                             jobName,
                             cron,
-                            elasticSimpleJobAnnotation.shardingTotalCount()
-                    ).shardingItemParameters(elasticSimpleJobAnnotation.shardingItemParameters())
+                            shardingTotalCount
+                    ).shardingItemParameters(shardingItemParameters)
                             .build(),
                     simpleJob.getClass().getCanonicalName());
             //定义Lite作业根配置

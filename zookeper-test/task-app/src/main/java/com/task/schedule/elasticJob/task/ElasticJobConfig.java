@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ElasticJobConfig {
     //作业名称
-    String name();
+    String name() default "";;
 
     /**
      * cron表达式，用于控制作业触发时间
