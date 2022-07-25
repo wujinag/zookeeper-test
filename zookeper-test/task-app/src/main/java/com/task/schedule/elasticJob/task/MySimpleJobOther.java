@@ -14,20 +14,19 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @ElasticJobConfig(
-        name = "MySimpleJob",cron = "0/5 * * * * ?",
+        name = "MySimpleJobOther-job",cron = "0/2 * * * * ?",
         shardingTotalCount=2,
         shardingItemParameters = "0=北京,1=上海"
 )
-public class MySimpleJob implements SimpleJob {
+public class MySimpleJobOther implements SimpleJob {
 
     @Override
     public void execute(ShardingContext shardingContext) {
         //System.out.println(shardingContext.getShardingParameter());
         try {
-            log.info(String.format("----MySimpleJob --Thread ID: %s, 任務總片數: %s, " +
+            log.info(String.format("----MySimpleJobOther --Thread ID: %s, 任務總片數: %s, " +
                             "当前分片項: %s.当前參數: %s," +
-                            "当前任務名稱: %s.当前任務參數: %s"
-                    ,
+                            "当前任務名稱: %s.当前任務參數: %s",
                     Thread.currentThread().getId(),
                     shardingContext.getShardingTotalCount(),
                     shardingContext.getShardingItem(),
