@@ -22,8 +22,7 @@ public class MySimpleJobOther implements SimpleJob {
 
     @Override
     public void execute(ShardingContext shardingContext) {
-        //System.out.println(shardingContext.getShardingParameter());
-        try {
+        log.info("=====MySimpleJob job excute ====start ========>"+shardingContext.getShardingParameter());
             log.info(String.format("----MySimpleJobOther --Thread ID: %s, 任務總片數: %s, " +
                             "当前分片項: %s.当前參數: %s," +
                             "当前任務名稱: %s.当前任務參數: %s",
@@ -35,11 +34,7 @@ public class MySimpleJobOther implements SimpleJob {
                     shardingContext.getJobParameter()
 
             ));
-            Thread.sleep(3000L);
 
-            log.info("=====elastic job excute ============>"+shardingContext.getShardingParameter()+"<=============");
-        } catch (InterruptedException e) {
-           log.error("err=======>"+e);
-        }
+        log.info("=====MySimpleJob job excute ====end ========>"+shardingContext.getShardingParameter());
     }
 }

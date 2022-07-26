@@ -1,0 +1,10 @@
+[WARN ] 2022-07-26 11:45:50,570 --qtp1050349584-20-- [org.apache.curator.utils.ZKPaths] The version of ZooKeeper being used doesn't support Container nodes. CreateMode.PERSISTENT will be used instead. 
+[WARN ] 2022-07-26 12:18:46,869 --qtp1050349584-15-EventThread-- [org.apache.curator.ConnectionState] Session expired event received 
+[WARN ] 2022-07-26 12:18:46,942 --qtp1050349584-24-EventThread-- [org.apache.curator.ConnectionState] Session expired event received 
+[WARN ] 2022-07-26 12:18:46,952 --qtp1050349584-20-EventThread-- [org.apache.curator.ConnectionState] Session expired event received 
+[WARN ] 2022-07-26 13:19:32,628 --qtp1050349584-24-EventThread-- [org.apache.curator.ConnectionState] Session expired event received 
+[WARN ] 2022-07-26 13:19:32,628 --qtp1050349584-20-EventThread-- [org.apache.curator.ConnectionState] Session expired event received 
+[WARN ] 2022-07-26 13:19:32,640 --qtp1050349584-15-EventThread-- [org.apache.curator.ConnectionState] Session expired event received 
+[WARN ] 2022-07-26 13:34:35,561 --qtp1050349584-24-EventThread-- [org.apache.curator.ConnectionState] Session expired event received 
+[WARN ] 2022-07-26 13:34:36,530 --qtp1050349584-15-EventThread-- [org.apache.curator.ConnectionState] Session expired event received 
+[WARN ] 2022-07-26 13:34:36,563 --qtp1050349584-20-EventThread-- [org.apache.curator.ConnectionState] Session expired event received 

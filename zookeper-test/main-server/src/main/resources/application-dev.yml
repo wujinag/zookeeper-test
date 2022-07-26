@@ -79,6 +79,7 @@ zookeeper:
 
 # simplejob配置
 MySimpleJob:
+
   cron: 0/5 * * * * ?
   shardingTotalCount: 5
   shardingItemParameters: 0=java,1=php,2=erlang,3=angular,4=vue
