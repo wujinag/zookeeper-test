@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
 import java.util.Map;
+import java.util.Objects;
 
 @Configuration
 @RequiredArgsConstructor
@@ -43,9 +44,15 @@ public class ElasticJobAutoConfiguration {
             }
             String jobName = StringUtils.defaultIfBlank(elasticSimpleJobAnnotation.name(), simpleJob.getClass().getSimpleName());
             //获取系统配置的定时任务参数
-            String cron = StringUtils.defaultIfBlank(environment.getProperty(jobName+".cron").toString(), elasticSimpleJobAnnotation.cron());
-            int shardingTotalCount = Integer.valueOf(environment.getProperty(jobName+".shardingTotalCount"));
-            String shardingItemParameters = environment.getProperty(jobName+".shardingItemParameters").toString();
+            String cron = StringUtils.defaultIfBlank(
+                    environment.getProperty(jobName+".cron").toString(), elasticSimpleJobAnnotation.cron());
+
+            int shardingTotalCount = Objects.nonNull(environment.getProperty(jobName+".shardingTotalCount"))
+                        ? Integer.valueOf(environment.getProperty(jobName+".shardingTotalCount")):elasticSimpleJobAnnotation.shardingTotalCount();
+
+            String shardingItemParameters = StringUtils.defaultIfBlank(
+                    environment.getProperty(jobName+".shardingItemParameters").toString(),elasticSimpleJobAnnotation.shardingItemParameters());
+
             //定义SIMPLE类型配置
             SimpleJobConfiguration simpleJobConfiguration = new SimpleJobConfiguration(
                     JobCoreConfiguration.newBuilder(
@@ -55,6 +62,7 @@ public class ElasticJobAutoConfiguration {
                     ).shardingItemParameters(shardingItemParameters)
                             .build(),
                     simpleJob.getClass().getCanonicalName());
+
             //定义Lite作业根配置
             LiteJobConfiguration liteJobConfiguration =
                     LiteJobConfiguration.newBuilder(simpleJobConfiguration).overwrite(true)
