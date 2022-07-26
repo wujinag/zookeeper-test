@@ -19,7 +19,7 @@ public class Swagger2Config {
     public Docket createRestApi(){
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
-                .select().apis(RequestHandlerSelectors.basePackage("com.zookeper.zk.controller"))
+                .select().apis(RequestHandlerSelectors.basePackage("com.app.controller"))
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(PathSelectors.any()).build();
@@ -28,7 +28,7 @@ public class Swagger2Config {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("SwaggerUI演示")
-                .description("zookeeper-test")
+                .description("person-platform")
                 .contact("zk")
                 .version("1.0")
                 .build();

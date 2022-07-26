@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @ElasticJobConfig(
-        cron = "0/2 * * * * ?",
+        cron = "0/40 * * * * ?",
         shardingTotalCount=2,
         shardingItemParameters = "0=北京,1=上海"
 )
