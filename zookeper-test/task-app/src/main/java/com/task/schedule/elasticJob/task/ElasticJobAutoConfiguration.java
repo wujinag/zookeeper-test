@@ -42,15 +42,11 @@ public class ElasticJobAutoConfiguration {
                 continue;
             }
             String jobName = StringUtils.defaultIfBlank(elasticSimpleJobAnnotation.name(), simpleJob.getClass().getSimpleName());
-            //String cron = StringUtils.defaultIfBlank(elasticSimpleJobAnnotation.cron(), elasticSimpleJobAnnotation.value());
-            //定义SIMPLE类型配置
             //获取系统配置的定时任务参数
-            String cron = environment.getProperty(jobName+".cron").toString();
-
+            String cron = StringUtils.defaultIfBlank(environment.getProperty(jobName+".cron").toString(), elasticSimpleJobAnnotation.cron());
             int shardingTotalCount = Integer.valueOf(environment.getProperty(jobName+".shardingTotalCount"));
-
             String shardingItemParameters = environment.getProperty(jobName+".shardingItemParameters").toString();
-
+            //定义SIMPLE类型配置
             SimpleJobConfiguration simpleJobConfiguration = new SimpleJobConfiguration(
                     JobCoreConfiguration.newBuilder(
                             jobName,
