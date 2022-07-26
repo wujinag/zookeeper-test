@@ -4,7 +4,7 @@ import com.dangdang.ddframe.job.api.simple.SimpleJob;
 import com.dangdang.ddframe.job.config.JobCoreConfiguration;
 import com.dangdang.ddframe.job.config.simple.SimpleJobConfiguration;
 import com.dangdang.ddframe.job.event.JobEventConfiguration;
-import com.dangdang.ddframe.job.lite.api.strategy.impl.AverageAllocationJobShardingStrategy;
+import com.dangdang.ddframe.job.lite.api.strategy.impl.OdevitySortByNameJobShardingStrategy;
 import com.dangdang.ddframe.job.lite.config.LiteJobConfiguration;
 import com.dangdang.ddframe.job.lite.spring.api.SpringJobScheduler;
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperRegistryCenter;
@@ -64,10 +64,13 @@ public class ElasticJobAutoConfiguration {
                     simpleJob.getClass().getCanonicalName());
 
             //定义Lite作业根配置
+            //AverageAllocationJobShardingStrategy的缺点是一旦分片数小于Job实例数，
+            // 作业将永远分配至IP地址靠前的Job实例上，导致IP地址靠后的Job实例空闲。
+            // 而OdevitySortByNameJobShardingStrategy则可以根据作业名称重新分配Job实例负载。
             LiteJobConfiguration liteJobConfiguration =
                     LiteJobConfiguration.newBuilder(simpleJobConfiguration).overwrite(true)
                     // jobShardingStrategyClass：分片策略
-                    .jobShardingStrategyClass(AverageAllocationJobShardingStrategy.class.getCanonicalName())
+                    .jobShardingStrategyClass(OdevitySortByNameJobShardingStrategy.class.getCanonicalName())
                     .build();
             SpringJobScheduler jobScheduler = new SpringJobScheduler(simpleJob, center, liteJobConfiguration, jobEventConfiguration);
             jobScheduler.init();

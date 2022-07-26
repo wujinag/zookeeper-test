@@ -70,7 +70,7 @@ public @interface ElasticJobConfig {
      */
     String description() default "";
 
-    boolean overwrite() default false;
+    boolean overwrite() default true;
 
     /*********************DataflowJobConfiguration END********************/
 
