@@ -72,7 +72,7 @@ public class ElasticJobAutoConfiguration {
                     // jobShardingStrategyClass：分片策略
                     .jobShardingStrategyClass(OdevitySortByNameJobShardingStrategy.class.getCanonicalName())
                     .build();
-            SpringJobScheduler jobScheduler = new SpringJobScheduler(simpleJob, center, liteJobConfiguration, jobEventConfiguration);
+            SpringJobScheduler jobScheduler = new SpringJobScheduler(simpleJob, center, liteJobConfiguration, jobEventConfiguration,new MyElasticJobListener());
             jobScheduler.init();
         }
     }
